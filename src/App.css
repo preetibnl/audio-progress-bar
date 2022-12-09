@@ -1,3 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "ubermovebold-webfont";
+  src: local("ubermovebold-webfont"),
+    url("./assets/font/ubermovebold-webfont.woff2") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "ubermovemedium-webfont";
+  src: local("ubermovemedium-webfont"),
+    url("./assets/font/ubermovemedium-webfont.woff2") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +55,44 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.button-bar {
+  display: flex;
+  border: 2px solid #fff;
+  max-width: 164px;
+  width: 100%;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 0 0;
+}
+
+.volume-btn svg{
+  font-size: 22px;
+}
+
+
+.video-time{
+  display: flex;
+}
+
+h1.audio_text {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 18px;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+video.remove_video {
+  display: none;
+}
+video#myAudio {
+  margin-top: 90px;
+}
+button:focus {
+  outline: none !important;
 }
