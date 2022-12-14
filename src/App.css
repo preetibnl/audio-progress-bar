@@ -90,9 +90,18 @@ h1.audio_text {
 video.remove_video {
   display: none;
 }
+
+
 video#myAudio {
   margin-top: 90px;
 }
+
+
 button:focus {
   outline: none !important;
+}
+
+
+.buttonDis {
+  pointer-events: none;
 }
