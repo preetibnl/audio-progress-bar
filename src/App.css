@@ -105,3 +105,32 @@ button:focus {
 .buttonDis {
   pointer-events: none;
 }
+
+.bg-success{
+  background-color: #D80DCA !important;
+}
+
+.bg-danger{
+  background-color: #0AD725 !important;
+}
+
+.bg-warning{
+  background-color: #D50A0F !important;
+}
+
+.bg-info{
+  background-color: #D4C10D !important;
+}
+
+.bg-dark{
+  background-color: #07C8D8 !important;
+}
+
+.progress-bar{
+  border-radius: 30px !important;
+  opacity: 0.5 !important;
+}
+
+/* .call_action.p_bar_2 {
+  background-color: #d80dca;
+} */
