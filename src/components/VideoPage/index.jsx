@@ -62,6 +62,7 @@ const Index = ({ source, fileType, audioName }) => {
 
 
     const [isPlaying, setIsPlaying] = useState(false);
+    const [togglePlay, setTogglePlay] = useState(false)
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [videoSection, setVideoSection] = useState(timeTracker);
@@ -130,7 +131,9 @@ const Index = ({ source, fileType, audioName }) => {
 
     const togglePlayPause = () => {
         setIsPlaying(!isPlaying);
+
     }
+
 
     useEffect(() => {
         if (isPlaying) {
@@ -163,8 +166,6 @@ const Index = ({ source, fileType, audioName }) => {
 
 
     }
-
-    console.warn("time", timeTracker)
 
     const getQuestionTime = (event) => {
 
@@ -377,7 +378,8 @@ const Index = ({ source, fileType, audioName }) => {
     }, [currentTime])
 
 
-    const handleEventColor = () => {
+    const handleEventColor = (isPlaying) => {
+
 
         $(".p_more").click(function () {
             if ($(this).hasClass("active")) {
@@ -399,7 +401,7 @@ const Index = ({ source, fileType, audioName }) => {
             $(".progress-bar").removeClass("p_bar_6");
             if (c == 1) {
                 $(".progress").append(
-                    '<div class="progress bg-transparent p_bar_' + c + '" style="width: 1%"></div>'
+                    '<div class="progress-bar p_bar_' + c + '" style="width: 1%"></div>'
                 );
             } else if (c == "2") {
                 $(".progress").append(
@@ -433,11 +435,9 @@ const Index = ({ source, fileType, audioName }) => {
                 );
             }
 
-            // console.log({ c });
-            // console.log("divv", `<div class="progress-bar p_bar_' + ${c} + '" style="width: 1%"></div>`)
-            console.log("check", c);
             barAnim(c, 1);
-        });
+        })
+
 
 
 
@@ -449,24 +449,24 @@ const Index = ({ source, fileType, audioName }) => {
             btn_fivth: timeTracker?.Insight.length > 0 && calulateSectionInPercent(duration, timeTracker?.Insight[0], timeTracker?.Insight[1])
         }
 
-        console.warn("sample", allPercent);
+        // console.warn("sample", allPercent);
 
         function barAnim(current, v) {
-
             getValue += 1;
 
             v += 1;
             let runningTime = progressBar.current.value;
             let totalTime = Math.floor(audioPlayer?.current?.duration);
 
-            if (runningTime >= totalTime) {
+            if (getValue >= totalTime) {
                 var id = window.setTimeout(function () { }, 100);
                 while (id--) {
                     window.clearTimeout(id); // will do nothing if no timeout with id is present
                 }
             } else {
+
                 $(".p_bar_" + current)
-                    .css("width", runningTime + "%")
+                    .css("width", v + "%")
                     //.css("width", allPercent?.btn_one + "%")
                     .attr("aria-valuenow", 1);
                 var id = window.setTimeout(function () { }, 100);
@@ -475,8 +475,7 @@ const Index = ({ source, fileType, audioName }) => {
                 }
                 setTimeout(barAnim, 1000, current, v);
             }
-            // console.log("barrr", `".p_bar_" + ${current}`)
-            // console.log("vvv", `"width", ${v} + "%"`)
+
         }
 
         if (getValue == 0) {
@@ -493,26 +492,30 @@ const Index = ({ source, fileType, audioName }) => {
 
     function newFunction() {
         togglePlayPause()
-        handleEventColor()
+        handleEventColor(isPlaying);
     }
 
 
     return (
         <>
 
-            {/* <div class="progress">
-                <div class="progress-bar bg-info" style={{
-                    width: "35%",
-                }}>First</div>
+            {/* <div className="progress" current_progress="0" style={{ maxWidth: "60%" }}>
+                <div className="progress-bar p_bar_1"
+                    style={{ width: "1%" }}>
+                </div>
 
-                <div class="progress-bar bg-warning" style={{
-                    width: "20%"
-                }}>Second</div>
+                // 
+                1. Testing the bugs for Admin pages:
+                a. Questing-> All the crud operations are working, and database 
+                is running as the back end.
+                b. 
 
-                <div class="progress-bar bg-dark" style={{
-                    width: "30%"
-                }} >Third</div>
-            </div> */}
+            </div>
+
+            <br />
+            <button class="p_more " d_v="2">Sucess</button>
+            <button class="p_more" d_v="3">Danger</button>
+            <button class="p_more" d_v="4">Warning</button> */}
 
 
             <div
@@ -555,11 +558,16 @@ const Index = ({ source, fileType, audioName }) => {
 
                             <div className="pb-2 mt-3 relative">
                                 <div className="absolute w-full top-[30%] z-[1]" style={{ maxWidth: "100%" }}>
-                                    <div className="progress bg-transparent relative" style={{ width: "100%", background: "transprent" }}>
+                                    {/* <div className="progress bg-transparent relative" style={{ width: "100%", background: "transprent" }}> */}
+                                    <div className="progress bg-transparent relative" current_progress="0" style={{ maxWidth: "100%" }}>
+                                        <div className="progress-bar p_bar_1"
+                                            style={{ width: "1%" }}>
+                                        </div>
+
+                                    </div>
 
 
-
-                                        {/* {
+                                    {/* {
                                             triggerColor?.color1 ? TriggerColor1 : null}
                                           
                                         {
@@ -576,9 +584,12 @@ const Index = ({ source, fileType, audioName }) => {
                                             triggerColor?.color5 ? TriggerColor5 : null
                                         } */}
 
-                                    </div>
+                                    {/* </div> */}
                                 </div>
-                                <input id="audioplay" type="range" className={styles.progressBar} defaultValue="0" ref={progressBar} onChange={changeRange} />
+                                <input
+                                    id="audioplay" type="range"
+                                    className={styles.progressBar}
+                                    defaultValue="0" ref={progressBar} onChange={changeRange} />
                             </div>
 
 
